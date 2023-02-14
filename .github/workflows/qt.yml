@@ -4,9 +4,12 @@ name: QT
 
 # Controls when the workflow will run
 on:
+    push:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '.github/workflows/windows.yml'
   pull_request:
     branches: [ "main" ]
 
