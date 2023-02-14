@@ -40,3 +40,4 @@ jobs:
           ./configure -prefix ./static-build -release -confirm-license -opensource -c++std c++11 -static  -platform linux-g++-64  -qt-zlib -qt-libpng -qt-libjpeg -no-journald  -openssl -opengl -xcb -skip qtquickcontrols -skip qtquickcontrols2 -skip qtsensors -skip qtdoc -skip examples
           make
           make install
+## github action硬盘不够，不用再搞了
