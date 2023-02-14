@@ -1,0 +1,48 @@
+# This is a basic workflow to help you get started with Actions
+
+name: windows
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  windows:
+    runs-on: windows-2022
+    steps:
+      - name: Tool
+        run: |
+          npm i -g download-cli  extract-zip
+          download https://github.com/mstorsjo/llvm-mingw/releases/download/20220906/llvm-mingw-20220906-msvcrt-x86_64.zip llvm-mingw-20220906-msvcrt-x86_64.zip
+          extract-zip llvm-mingw-20220906-msvcrt-x86_64.zip ./
+      - name: Install QT Src
+        run: | 
+          download https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.zip qt-everywhere-src-6.4.2.zip
+          extract-zip qt-everywhere-src-6.4.2.zip ./qt-everywhere-src-6.4.2
+      - name: Config
+        run: |
+          cd qt-everywhere-src-6.4.2
+          .\configure -prefix .\static-build -release -confirm-license -opensource -c++std c++11 -static  -no-qml-debug -platform linux-g++-64  -qt-zlib -qt-libpng -qt-libjpeg -no-journald  -openssl -opengl -xcb -skip qtquickcontrols -skip qtquickcontrols2 -skip qtsensors -skip qtdoc -skip examples
+          ..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make 
+          ..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make install
+      - name: Zip
+        uses: vimtor/action-zip@v1
+        with:
+          files: qt-everywhere-src-6.4.2/static-build
+          dest: qt.zip
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "qt.zip"
+          allowUpdates: true
+          draft: false
+          tag: windows
