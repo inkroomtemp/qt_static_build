@@ -32,7 +32,13 @@ jobs:
       - name: Config
         run: |
           cd qt-everywhere-src-6.4.2
-          .\configure -prefix .\static-build -release -confirm-license -opensource -c++std c++11 -static -qt-zlib -qt-libpng -qt-libjpeg -no-journald  -nomake tools -nomake tests -skip qtquickcontrols -skip qtquickcontrols2 -skip qtsensors -skip qt3d -skip qtdoc -skip examples &&  ..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make && ..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make install
+          .\configure -prefix .\static-build -release -confirm-license -opensource -c++std c++11 -static -qt-zlib -qt-libpng -qt-libjpeg -no-journald  -nomake tools -nomake tests -skip qtquickcontrols -skip qtquickcontrols2 -skip qtsensors -skip qt3d -skip qtdoc -skip examples 
+      - name: Build
+        run: |
+          ls -all
+          cd static-build
+          ls -all
+          ..\..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make && ..\..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make install
       - name: Zip
         uses: vimtor/action-zip@v1
         with:
