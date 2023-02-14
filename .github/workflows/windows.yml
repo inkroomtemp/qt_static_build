@@ -24,7 +24,7 @@ jobs:
       - name: Tool
         run: |
           npm i -g download-cli  extract-zip
-          download --extract --strip 1 --out ./ https://github.com/mstorsjo/llvm-mingw/releases/download/20220906/llvm-mingw-20220906-msvcrt-x86_64.zip
+          download --extract --strip 1 --out ./llvm-mingw-20220906-msvcrt-x86_64 https://github.com/mstorsjo/llvm-mingw/releases/download/20220906/llvm-mingw-20220906-msvcrt-x86_64.zip
       - name: Install QT Src
         run: | 
           download --strip 1 --out ./ https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.zip
@@ -33,8 +33,8 @@ jobs:
         run: |
           cd qt-everywhere-src-6.4.2
           .\configure -prefix .\static-build -release -confirm-license -opensource -c++std c++11 -static -qt-zlib -qt-libpng -qt-libjpeg -no-journald  -openssl -opengl -skip qtquickcontrols -skip qtquickcontrols2 -skip qtsensors -skip qtdoc -skip examples
-          ..\llvm-mingw-20220906-msvcrt-x86_64\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make 
-          ..\llvm-mingw-20220906-msvcrt-x86_64\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make install
+          ..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make 
+          ..\llvm-mingw-20220906-msvcrt-x86_64\bin\mingw32-make install
       - name: Zip
         uses: vimtor/action-zip@v1
         with:
