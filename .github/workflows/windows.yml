@@ -22,11 +22,11 @@ jobs:
       - name: Tool
         run: |
           npm i -g download-cli  extract-zip
-          download https://github.com/mstorsjo/llvm-mingw/releases/download/20220906/llvm-mingw-20220906-msvcrt-x86_64.zip llvm-mingw-20220906-msvcrt-x86_64.zip
+          download https://github.com/mstorsjo/llvm-mingw/releases/download/20220906/llvm-mingw-20220906-msvcrt-x86_64.zip > llvm-mingw-20220906-msvcrt-x86_64.zip
           extract-zip llvm-mingw-20220906-msvcrt-x86_64.zip ./
       - name: Install QT Src
         run: | 
-          download https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.zip qt-everywhere-src-6.4.2.zip
+          download https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.zip > qt-everywhere-src-6.4.2.zip
           extract-zip qt-everywhere-src-6.4.2.zip ./qt-everywhere-src-6.4.2
       - name: Config
         run: |
