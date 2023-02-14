@@ -27,7 +27,9 @@ jobs:
           download --extract --strip 1 --out ./llvm-mingw-20220906-msvcrt-x86_64 https://github.com/mstorsjo/llvm-mingw/releases/download/20220906/llvm-mingw-20220906-msvcrt-x86_64.zip
       - name: Install QT Src
         run: | 
-          download --strip 1 --out ./ https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.zip
+          curl https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.zip -o qt-everywhere-src-6.4.2.zip
+      - name: Unzip
+        run: |
           extract-zip qt-everywhere-src-6.4.2.zip
       - name: Config
         run: |
