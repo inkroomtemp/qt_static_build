@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-RUN apt update -y && apt upgrade -y && apt install ssh \
+RUN apt update -y && apt upgrade -y && apt install -y \
  libc-dev-bin \
  libc-dev \
  g++ \
