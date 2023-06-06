@@ -9,6 +9,8 @@ on:
     branches: [ "main" ]
     paths-ignore:
       - '.github/workflows/qt.yml'
+      - 'dockerfile'
+      - 'daemon.json'
   pull_request:
     branches: [ "main" ]
 

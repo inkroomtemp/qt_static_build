@@ -37,6 +37,14 @@ jobs:
           remove-docker-images: true
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Change Docker
+        run: |
+          docker info | grep -i dir
+          sudo cp -a /var/lib/docker  /home/runner/work/qt_static_build/qt_static_build/
+          sudo cp daemon.json /etc/docker/
+          sudo systemctl daemon-reload
+          sudo systemctl restart docker
+          docker info | grep -i dir
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Build Docker image

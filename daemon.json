@@ -1,0 +1,4 @@
+{
+    "exec-opts": ["native.cgroupdriver=systemd"],
+    "data-root": "/home/runner/work/qt_static_build/qt_static_build/docker"
+ }
