@@ -21,7 +21,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
-
+    permissions: write-all
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -52,6 +52,8 @@ jobs:
         with:
           context: .
           file: dockerfile
-          push: false
-          tags: qt_static
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2
           labels: qt_static
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
