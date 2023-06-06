@@ -1,6 +1,8 @@
 FROM ubuntu:20.04
 
-RUN apt update -y && apt upgrade -y && apt install -y \
+RUN export DEBIAN_FRONTEND=noninteractive && apt update -y && apt-get install -y tzdata \
+    && ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata  && apt upgrade -y && apt install -y \
  libc-dev-bin \
  libc-dev \
  g++ \
