@@ -58,5 +58,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - run: |
-        df -h
-        du -h --max-depth=1
+          df -h
+          du -h --max-depth=1
+          docker images
