@@ -58,7 +58,7 @@ jobs:
         with:
           context: .
           file: dockerfile
-          push: true
+          push: false
           tags: ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2
           labels: qt_static
           cache-from: type=gha
@@ -67,3 +67,11 @@ jobs:
           df -h
           du -h --max-depth=1
           docker images
+          docker run -d --name qt ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2 /bin/bash
+          docker cp qt:/qt-everywhere-src-6.4.2/static-build ./
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: qt
+          path: static-build/*
+
