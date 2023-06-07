@@ -26,5 +26,5 @@ RUN wget https://cmake.org/files/v3.21/cmake-3.21.7.tar.gz && tar zxvf cmake-3.2
 RUN wget -q https://download.qt.io/official_releases/qt/6.4/6.4.2/single/qt-everywhere-src-6.4.2.tar.xz \
  && tar -xf qt-everywhere-src-6.4.2.tar.xz && cd qt-everywhere-src-6.4.2 && ./configure --help && ./configure -prefix ./static-build -release -confirm-license -opensource -c++std c++11 -static  -platform linux-g++-64  -qt-zlib -qt-libpng -qt-libjpeg -no-journald  -openssl -opengl -xcb -skip qtquickcontrols -skip qtquickcontrols2 -skip qtsensors -skip qtdoc -skip examples 
 RUN cd qt-everywhere-src-6.4.2 && make  -j 2 && echo "make成功"
-RUN cd cd qt-everywhere-src-6.4.2 && make install && echo "install成功" && cd static-build && tree
+RUN cd qt-everywhere-src-6.4.2 && make install && echo "install成功" && cd static-build && tree
 
