@@ -66,13 +66,13 @@ jobs:
       - name: Space
         if: ${{ always() }}
         run: |
-          df -h
-          du -h --max-depth=1
-          docker images
-          docker run -d --name qt ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2 /bin/bash
-          docker cp qt:/qt-everywhere-src-6.4.2/static-build ./
-          docker stop qt
-          docker rm qt
+          sudo df -h
+          sudo du -h --max-depth=1 || true
+          sudo docker images
+          sudo docker run -d --name qt ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2 /bin/bash
+          sudo docker cp qt:/static-build ./
+          sudo docker stop qt
+          sudo docker rm qt
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
