@@ -61,9 +61,11 @@ jobs:
           push: false
           tags: ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2
           labels: qt_static
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      - run: |
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
+      - name: Space
+        if: ${{ always() }}
+        run: |
           df -h
           du -h --max-depth=1
           docker images
@@ -71,6 +73,7 @@ jobs:
           docker cp qt:/qt-everywhere-src-6.4.2/static-build ./
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
+        if: ${{ always() }}
         with:
           name: qt
           path: static-build/*
