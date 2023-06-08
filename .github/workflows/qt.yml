@@ -54,15 +54,17 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: dockerfile
-          push: false
-          tags: ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2
-          labels: qt_static
-          # cache-from: type=gha
-          # cache-to: type=gha,mode=max
+        run: |
+          sudo docker build . -t ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2 -f dockerfile
+        # uses: docker/build-push-action@v4
+        # with:
+        #   context: .
+        #   file: dockerfile
+        #   push: false
+        #   tags: ghcr.io/${{ github.repository_owner }}/qt_static:6.4.2
+        #   labels: qt_static
+        #   # cache-from: type=gha
+        #   # cache-to: type=gha,mode=max
       - name: Space
         if: ${{ always() }}
         run: |
