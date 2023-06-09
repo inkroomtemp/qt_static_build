@@ -83,6 +83,8 @@ jobs:
           name: qt-6.5.1.tar.gz
           path: qt-6.5.1.tar.gz
       - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           TAGNAME=v6.5.1
           gh release create --target main $TAGNAME ./qt-6.5.1.tar.gz
